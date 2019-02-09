@@ -25,7 +25,8 @@ def add_data_to_file(file_name, new_data, labels):
 
 
 def check_labels_in_csv(file_name, labels):
+    bytes_of_row_in_csv_line = 72
     with open(file_name, 'r+') as csvfile:
-        first_line = csvfile.readline(72)
+        first_line = csvfile.readline(bytes_of_row_in_csv_line)
         if not first_line == ','.join(labels):
             csvfile.write(','.join(labels))
