@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user-story main page</title>
+</head>
+<body>
+    <h1>USER_STORY</h1>
+    <form action="/story" method="GET">
+        <input type="submit" value="Add new user story">
+    </form>
+
+    <table width="20">
+            <thead>
+                <tr>
+                    <th><strong>{{ labels[0] }}</strong></th>
+                    <th><strong>{{ labels[1] }}</strong></th>
+                    <th><strong>{{ labels[2] }}</strong></th>
+                    <th><strong>{{ labels[3] }}</strong></th>
+                    <th><strong>{{ labels[4] }}</strong></th>
+                    <th><strong>{{ labels[5] }}</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for row in data %}
+                <tr>
+                    <td><p>{{ row[labels[0]] }}</p></td>
+                    <td><p>{{ row[labels[1]] }}</p></td>
+                    <td><p>{{ row[labels[2]] }}</p></td>
+                    <td><p>{{ row[labels[3]] }}</p></td>
+                    <td><p>{{ row[labels[4]] }}</p></td>
+                    <td><p>{{ row[labels[5]] }}</p></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+</body>
+
+</html>

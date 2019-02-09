@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+    <form action="/story" method="POST">
+        <h2>Story title:</h2>
+        <input type="text" name="user_story_info" min="5" required="True">
+
+        <h2>Acceptance Criteria:</h2>
+        <textarea name="user_story_info" required="True" wrap="soft"></textarea>
+
+        <h2>Business Value:</h2>
+        <input type="number " name="user_story_info" value="Add business value...">
+
+        <h2>Estimation Time:</h2>
+        <input type="number " name="user_story_info" value="Add ET...">
+
+        <h2>Status:</h2>
+        <select name="user_story_info">
+            <option value="To do">To do</option>
+            <option value="In progress">In progress</option>
+            <option value="Done">Done</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Add user story">
+    </form>
+
+
+</body>
+
+</html>
