@@ -2,8 +2,8 @@ from flask import Flask, flash, redirect, render_template, \
      request, url_for
 
 import data_manager
-
-LABELS = ['ID', 'Story Title', 'Acceptance Criteria', 'Business Value', 'Estimation Time', 'Status']
+LABELS = ('ID', 'Story Title', 'Acceptance Criteria', 'Business Value', 'Estimation Time', 'Status')
+DICT_KEYS = ('id', 'storytitle', 'acceptancecriteria', 'businessvalue', 'estimationtime', 'status')
 FILENAME = 'sample_data/data.csv'
 
 
@@ -12,9 +12,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    data_manager.check_labels_in_csv(FILENAME, LABELS)
-    data_dict = data_manager.get_data_from_file(FILENAME)
-    return render_template('main-page.html', data=data_dict, labels=LABELS)
+    data_dict = data_manager.get_data_list_of_dicts()
+    return render_template('main-page.html', data=data_dict, labels=LABELS, keys=DICT_KEYS)
 
 
 @app.route('/story', methods=['GET'])
@@ -25,7 +24,7 @@ def add_new_story():
 @app.route('/story', methods=['POST'])
 def save_story():
     new_data = request.form.getlist('user_story_info')
-    data_manager.add_data_to_file(FILENAME, new_data, LABELS)
+    data_manager.add_data(new_data)
     return redirect(url_for('index'))
 
 

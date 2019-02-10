@@ -2,31 +2,30 @@
 import common
 import csv
 import os
+import common_data_base
+from psycopg2 import sql
+import psycopg2.extras as e
 
 
-def get_data_from_file(file_name):
-    data_dict = []
-    with open(file_name, 'r+') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            data_dict.append(dict(row))
-        return data_dict
+
+@common_data_base.connection_handler
+def get_data_list_of_dicts(cursor):
+    cursor.execute("""
+                    SELECT * FROM storydata
+                    ORDER BY id;
+                   """)
+    rows = cursor.fetchall()
+    return rows
 
 
-def add_data_to_file(file_name, new_data, labels):
-    exists = os.path.isfile(file_name)
-    prepared_new_data = common.prepare_data_for_dictwriter(new_data)
-
-    with open(file_name, 'a+') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=labels, delimiter=',')
-        if not exists:
-            writer.writeheader()
-        writer.writerow(prepared_new_data)
+def add_data(data):
+    connection = common_data_base.open_database()
+    cursor = connection.cursor()
+    cursor.execute("""
+        INSERT INTO storydata 
+        (storytitle, acceptancecriteria, businessvalue, estimationtime, status)
+        VALUES(%s, %s, %s, %s, %s); """, data)
 
 
-def check_labels_in_csv(file_name, labels):
-    bytes_of_row_in_csv_line = 72
-    with open(file_name, 'r+') as csvfile:
-        first_line = csvfile.readline(bytes_of_row_in_csv_line)
-        if not first_line == ','.join(labels):
-            csvfile.write(','.join(labels))
+if __name__ == "__main__":
+    pass
