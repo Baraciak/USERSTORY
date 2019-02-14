@@ -47,4 +47,4 @@ def connection_handler(function):
 
 
 if __name__ == "__main__":
-    open_database()
+    pass

@@ -3,40 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>user-story main page</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static' , filename='style.css') }}" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
-    <h1>USER_STORY</h1>
-    <form action="/story" method="GET">
-        <input type="submit" value="Add new user story">
-    </form>
+    <div class="wrapper">
+        <div class="header">
+            <div class="logo">SUPERSPRINTER 3000</div>
+        </div>
 
-    <table width="20">
-            <thead>
-                <tr>
-                    <th><strong>{{ labels[0] }}</strong></th>
-                    <th><strong>{{ labels[1] }}</strong></th>
-                    <th><strong>{{ labels[2] }}</strong></th>
-                    <th><strong>{{ labels[3] }}</strong></th>
-                    <th><strong>{{ labels[4] }}</strong></th>
-                    <th><strong>{{ labels[5] }}</strong></th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="blank_lane"></div>
 
-                {% for row in data %}
-                <tr>
-                    <td><p>{{ row[keys[0]] }}</p></td>
-                    <td><p>{{ row[keys[1]] }}</p></td>
-                    <td><p>{{ row[keys[2]] }}</p></td>
-                    <td><p>{{ row[keys[3]] }}</p></td>
-                    <td><p>{{ row[keys[4]] }}</p></td>
-                    <td><p>{{ row[keys[5]] }}</p></td>
-                </tr>
-                {% endfor %}
+        <div class="actions">
+            <form action="/story" method="GET">
+                <input type="submit" value="Add new user story">
+            </form>
+        </div>
 
-            </tbody>
-        </table>
+        <div class="blank_lane_2"></div>
 
+        <div class="lef_side_panel"></div>
+        <div class="vertical_blank"></div>
+
+        <div class="content">
+            <table width="20">
+                    <thead>
+                        <tr>
+                            <th><strong>{{ labels[0] }}</strong></th>
+                            <th><strong>{{ labels[1] }}</strong></th>
+                            <th><strong>{{ labels[2] }}</strong></th>
+                            <th><strong>{{ labels[3] }}</strong></th>
+                            <th><strong>{{ labels[4] }}</strong></th>
+                            <th><strong>{{ labels[5] }}</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for row in data %}
+                        <tr>
+                            <td><p>{{ row[keys[0]] }}</p></td>
+                            <td><a href="/story/{{ row[keys[0]] }}"><p>{{ row[keys[1]] }}</p></a>
+                                 <form action="/delete/2" method="POST">
+                                     <input type="submit" Value="X"/>
+                                 </form>
+                                </td>
+                            <td><p>{{ row[keys[2]] }}</p></td>
+                            <td><p>{{ row[keys[3]] }}</p></td>
+                            <td><p>{{ row[keys[4]] }}</p></td>
+                            <td><p>{{ row[keys[5]] }}</p></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="vertical_blank_2"></div>
+        <div class="right_side_panel"><h1>duspko</h1>></div>
+    </div>
 </body>
 
 </html>
