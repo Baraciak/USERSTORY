@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>user-story main page</title>
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet" type="text/css">
-    <link href="{{ url_for('static' , filename='style.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static' , filename='main_page_style.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
     <div class="wrapper">
         <div class="header">
-            <div class="logo">SUPERSPRINTER 3000</div>
+            <div class="logo"><span style="color: #1587c9">SUPER</span>SPRINTER 3000</div>
         </div>
 
         <div class="blank_lane"></div>
@@ -23,9 +23,6 @@
 
         <div class="blank_lane_2"></div>
 
-        <div class="left_side_panel"></div>
-        <div class="vertical_blank"></div>
-
         <div class="content">
             <table width="20">
                     <thead>
@@ -36,6 +33,7 @@
                             <th><strong>{{ labels[3] }}</strong></th>
                             <th><strong>{{ labels[4] }}</strong></th>
                             <th><strong>{{ labels[5] }}</strong></th>
+                            <th><strong>DELETE</strong></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,24 +41,25 @@
                         {% for row in data %}
                         <tr>
                             <td><p>{{ row[keys[0]] }}</p></td>
-                            <td><a href="/story/{{ row[keys[0]] }}"><p>{{ row[keys[1]] }}</p></a>
-                                 <form action="/delete/2" method="POST">
-                                     <input type="submit" Value="X"/>
-                                 </form>
-                                </td>
+                            <td><a href="/story/{{ row[keys[0]] }}"><p>{{ row[keys[1]] }}</p></a></td>
                             <td><p>{{ row[keys[2]] }}</p></td>
                             <td><p>{{ row[keys[3]] }}</p></td>
                             <td><p>{{ row[keys[4]] }}</p></td>
                             <td><p>{{ row[keys[5]] }}</p></td>
+                            <td>
+                                <form action="/delete/{{ row[keys[0]] }}" method="POST">
+                                    <input type="submit" Value="X"/>
+                                </form>
+                            </td>
                         </tr>
+
                         {% endfor %}
 
                     </tbody>
             </table>
         </div>
 
-        <div class="vertical_blank_2"></div>
-        <div class="right_side_panel"><h1>duspko</h1>></div>
+        <div class="footer"> &copy; Copyright 2019 by MONGOL </div>
     </div>
 </body>
 

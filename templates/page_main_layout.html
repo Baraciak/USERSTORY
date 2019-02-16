@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user-story main page</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static' , filename='main_page_style.css') }}" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="logo"><span style="color: #1587c9">SUPER</span>SPRINTER 3000</div>
+        </div>
+
+        <div class="blank_lane"></div>
+
+        <div class="actions">
+            <form action="/story" method="GET">
+                <input type="submit" value="Add new user story">
+            </form>
+        </div>
+
+        <div class="blank_lane_2"></div>
+
+        <div class="content-wrapper">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+</body>

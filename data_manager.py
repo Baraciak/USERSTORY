@@ -34,10 +34,9 @@ def get_data_by_id(cursor, story_id: dict):
 
 @common_data_base.connection_handler
 def remove_data_by_id(cursor, story_id: dict):
-    story_id_dick = {'storyid': story_id}
     cursor.execute("""
         DELETE FROM storydata 
-        WHERE id=%(storyid)s""", story_id_dick)
+        WHERE id=%(story_id)s""", story_id)
 
 
 @common_data_base.connection_handler

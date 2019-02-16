@@ -48,8 +48,7 @@ def save_updated_story(story_id):
 
 @app.route('/delete/<story_id>', methods=['POST'])
 def remove_story(story_id):
-    #logic.delete_story(story_id)
-    data_manager.remove_data_by_id(story_id)
+    logic.delete_story(story_id)
     return redirect(url_for('index'))
 
 
