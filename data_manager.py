@@ -1,6 +1,6 @@
 # functions for managing files
 import common_data_base
-
+import psycopg2
 
 
 @common_data_base.connection_handler
@@ -15,18 +15,37 @@ def get_data_list_of_dicts(cursor):
 
 @common_data_base.connection_handler
 def add_data(cursor, data: dict):
-    cursor.execute("""
-        INSERT INTO storydata 
-        (storytitle, acceptancecriteria, businessvalue, estimationtime, status)
-        VALUES(%(storytitle)s, %(acceptancecriteria)s, %(businessvalue)s, %(estimationtime)s, %(status)s); """,
-                   data)
+    try:
+        cursor.execute("""
+                INSERT INTO storydata 
+                (storytitle, acceptancecriteria, businessvalue, estimationtime, status, story_id)
+                VALUES(%(storytitle)s, %(acceptancecriteria)s, %(businessvalue)s,
+                        %(estimationtime)s, %(status)s, %(story_id)s); """, data)
+    except psycopg2.IntegrityError:
+        pass
+
+
+@common_data_base.connection_handler
+def id_update(cursor):
+    data = get_data_list_of_dicts()
+    id_index = 0
+    for row in data:
+        id_index += 1
+        row['story_id'] = id_index
+        try:
+            cursor.execute("""
+                        UPDATE storydata
+                        SET story_id=%(story_id)s
+                        WHERE id=%(id)s; """, row)
+        except psycopg2.IntegrityError:
+            print('error in id_update')
 
 
 @common_data_base.connection_handler
 def get_data_by_id(cursor, story_id: dict):
     cursor.execute("""
                        SELECT * FROM storydata
-                       WHERE id=%(storyid)s
+                       WHERE story_id=%(story_id)s
                       """, story_id)
     question = cursor.fetchall()
     return question
@@ -36,7 +55,7 @@ def get_data_by_id(cursor, story_id: dict):
 def remove_data_by_id(cursor, story_id: dict):
     cursor.execute("""
         DELETE FROM storydata 
-        WHERE id=%(story_id)s""", story_id)
+        WHERE story_id=%(story_id)s""", story_id)
 
 
 @common_data_base.connection_handler
@@ -47,7 +66,7 @@ def update_story(cursor, story_id: str, updated_data: dict):
         SET storytitle=%(storytitle)s, acceptancecriteria=%(acceptancecriteria)s,
         businessvalue=%(businessvalue)s, estimationtime=%(estimationtime)s,
         status=%(status)s
-        WHERE id=%(story_id)s""", updated_data)
+        WHERE story_id=%(story_id)s""", updated_data)
 
 
 if __name__ == "__main__":
