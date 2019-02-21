@@ -25,6 +25,17 @@ def add_data(cursor, data: dict):
         pass
 
 
+#### Whats better???
+@common_data_base.connection_handler
+def set_new_story_id(cursor):
+    cursor.execute("""
+                    SELECT MAX(story_id) FROM storydata;""")
+    counted = cursor.fetchall()
+    new_id = counted[0]['max'] + 1
+    return new_id
+####
+
+
 @common_data_base.connection_handler
 def id_update(cursor):
     data = get_data_list_of_dicts()
@@ -60,7 +71,7 @@ def remove_data_by_id(cursor, story_id: dict):
 
 @common_data_base.connection_handler
 def update_story(cursor, story_id: str, updated_data: dict):
-    updated_data.update({'story_id': story_id})  # adds actual story id # HEREQ!!!!!!!
+    updated_data.update({'story_id': story_id})  # adds actual story id
     cursor.execute("""
         UPDATE storydata 
         SET storytitle=%(storytitle)s, acceptancecriteria=%(acceptancecriteria)s,
@@ -70,4 +81,4 @@ def update_story(cursor, story_id: str, updated_data: dict):
 
 
 if __name__ == "__main__":
-    pass
+    print(set_new_story_id())

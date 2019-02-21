@@ -2,36 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>user-story main page</title>
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static' , filename='story_style.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="logo"><span style="color: #1587c9">SUPER</span>SPRINTER 3000</div>
+        </div>
 
-    <form action="/story/{{ story_id }}" method="POST">
-        <h2>Story title:</h2>
-        <input type="text" name="user_story_info" min="5" value="{{ selected_story['storytitle'] }}" required="True">
+        <div class="blank_lane"></div>
 
-        <h2>Acceptance Criteria:</h2>
-        <textarea name="user_story_info" required="True" wrap="soft">{{ selected_story['acceptancecriteria'] }}</textarea>
+        <div class="actions"></div>
 
-        <h2>Business Value:</h2>
-        <input type="text" name="user_story_info" value="{{ selected_story['businessvalue'] }}">
+        <div class="blank_lane_2"></div>
 
-        <h2>Estimation Time:</h2>
-        <input type="number" name="user_story_info" value="{{ selected_story['estimationtime'] }}">
+        <div class="content">
+            <form action="/story/{{ story_id }}" method="POST">
+                <h2>Story title:</h2>
+                    <input type="text" name="user_story_info" min="5" value="{{ selected_story['storytitle'] }}" required="True">
 
-        <h2>Status:</h2>
-        <select name="user_story_info">
-            <option value="To do">To do</option>
-            <option value="In progress">In progress</option>
-            <option value="Done">Done</option>
-        </select>
-        <br>
-        <br>
-        <input type="submit" value="Update user story">
-    </form>
+                <h2>Acceptance Criteria:</h2>
+                    <textarea name="user_story_info" required="True" wrap="soft">{{ selected_story['acceptancecriteria'] }}</textarea>
+
+                <h2>Business Value:</h2>
+                    <input type="text" name="user_story_info" value="{{ selected_story['businessvalue'] }}">
+
+                <h2>Estimation Time:</h2>
+                    <input type="number" name="user_story_info" value="{{ selected_story['estimationtime'] }}">
+
+                <h2>Status:</h2>
+                    <select name="user_story_info">
+                        <option value="To do">To do</option>
+                        <option value="In progress">In progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                <br>
+                <br>
+                <input type="submit" value="Update user story">
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="footer"> &copy; Copyright 2019 by MONGOL </div>
 
 
 </body>
-
 </html>
