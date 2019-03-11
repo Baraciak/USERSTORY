@@ -8,8 +8,9 @@ def set_new_story_id():
 
 def dictify_list(data: list, dict_keys: tuple):
     new_id = set_new_story_id()
-    dictified_data = {dict_keys[1]: data[0], dict_keys[2]: data[1], dict_keys[3]: data[2],
-                      dict_keys[4]: data[3], dict_keys[5]: data[4], dict_keys[6]: new_id}
+    dictified_data = {dict_keys[0]: new_id, dict_keys[1]: data[0],
+                      dict_keys[2]: data[1], dict_keys[3]: data[2],
+                      dict_keys[4]: data[3], dict_keys[5]: data[4]}
     return dictified_data
 
 

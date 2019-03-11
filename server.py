@@ -5,7 +5,7 @@ import data_manager
 import logic
 
 LABELS = ('ID', 'Story Title', 'Acceptance Criteria', 'Business Value', 'Estimation Time', 'Status')
-DICT_KEYS = ('id', 'storytitle', 'acceptancecriteria', 'businessvalue', 'estimationtime', 'status', 'story_id')
+DICT_KEYS = ('id', 'storytitle', 'acceptancecriteria', 'businessvalue', 'estimationtime', 'status')
 FILENAME = 'sample_data/data.csv'
 
 

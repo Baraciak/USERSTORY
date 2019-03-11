@@ -18,9 +18,9 @@ def add_data(cursor, data: dict):
     try:
         cursor.execute("""
                 INSERT INTO storydata 
-                (storytitle, acceptancecriteria, businessvalue, estimationtime, status, story_id)
-                VALUES(%(storytitle)s, %(acceptancecriteria)s, %(businessvalue)s,
-                        %(estimationtime)s, %(status)s, %(story_id)s); """, data)
+                (ID, storytitle, acceptancecriteria, businessvalue, estimationtime, status)
+                VALUES(%(id)s, %(storytitle)s, %(acceptancecriteria)s, %(businessvalue)s,
+                        %(estimationtime)s, %(status)s); """, data)
     except psycopg2.IntegrityError:
         pass
 
@@ -46,7 +46,7 @@ def id_update(cursor):
         try:
             cursor.execute("""
                         UPDATE storydata
-                        SET story_id=%(story_id)s
+                        SET id=%(story_id)s
                         WHERE id=%(id)s; """, row)
         except psycopg2.IntegrityError:
             print('error in id_update')
@@ -56,7 +56,7 @@ def id_update(cursor):
 def get_data_by_id(cursor, story_id: dict):
     cursor.execute("""
                        SELECT * FROM storydata
-                       WHERE story_id=%(story_id)s
+                       WHERE id=%(story_id)s
                       """, story_id)
     question = cursor.fetchall()
     return question
@@ -66,7 +66,7 @@ def get_data_by_id(cursor, story_id: dict):
 def remove_data_by_id(cursor, story_id: dict):
     cursor.execute("""
         DELETE FROM storydata 
-        WHERE story_id=%(story_id)s""", story_id)
+        WHERE id=%(story_id)s""", story_id)
 
 
 @common_data_base.connection_handler
@@ -77,7 +77,7 @@ def update_story(cursor, story_id: str, updated_data: dict):
         SET storytitle=%(storytitle)s, acceptancecriteria=%(acceptancecriteria)s,
         businessvalue=%(businessvalue)s, estimationtime=%(estimationtime)s,
         status=%(status)s
-        WHERE story_id=%(story_id)s""", updated_data)
+        WHERE id=%(story_id)s""", updated_data)
 
 
 if __name__ == "__main__":
